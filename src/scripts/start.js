@@ -6,6 +6,8 @@ import sidebar from './sidebar';
 import webview from './webview';
 import tray from './tray';
 import './menus';
+import fs from 'fs-extra';
+import path from 'path';
 
 sidebar.on('badge-setted', function () {
     const badge = sidebar.getGlobalBadge();
@@ -34,6 +36,11 @@ export const start = function () {
     window.addEventListener('online', online);
     window.addEventListener('offline', offline);
     // end connection check
+
+    const customUIStyle = fs.readFileSync(path.join(window.APPDATA_PATH, 'custom-ui.css'));
+    const customUI = document.createElement('style');
+    customUI.innerHTML = customUIStyle.toString();
+    document.body.appendChild(customUI);
 
     const form = document.querySelector('form');
     const hostField = form.querySelector('[name="host"]');

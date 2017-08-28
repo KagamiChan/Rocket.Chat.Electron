@@ -2,6 +2,9 @@
 
 Desktop application for [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat) available for macOS, Windows and Linux using [Electron](http://electron.atom.io).
 
+# Modification
+- support for custom css stylesheet
+
 # Download
 
 You can download the latest version from the [Releases](https://github.com/RocketChat/Rocket.Chat.Electron/releases/latest) page.
@@ -164,7 +167,7 @@ For Windows the full paths are:
 ~\Program Files\Rocket.Chat+\Resources\
 ```
 On MacOS the full path is:
-```		
+```
 ~/Users/<username>/Library/Application Support/Rocket.Chat+/
 ~/Applications/Rocket.Chat+.app/Contents/Resources/
 ```

@@ -2,6 +2,8 @@ import { EventEmitter } from 'events';
 import servers from './servers';
 import sidebar from './sidebar';
 import { desktopCapturer, ipcRenderer } from 'electron';
+import fs from 'fs-extra';
+import path from 'path';
 
 class WebView extends EventEmitter {
     constructor () {
@@ -71,6 +73,18 @@ class WebView extends EventEmitter {
             if ((lastPath.url).includes(host.url)) {
                 this.saveLastPath(host.url, lastPath.url);
             }
+        });
+
+        webviewObj.addEventListener('dom-ready', () => {
+            const customStyle = fs.readFileSync(path.join(window.APPDATA_PATH, 'custom.css'));
+
+            customStyle.toString();
+
+            webviewObj.executeJavaScript(`
+                const style = document.createElement('style')
+                style.innerHTML = \`${customStyle.toString()}\`
+                document.body.appendChild(style)
+            `);
         });
 
         webviewObj.addEventListener('console-message', function (e) {
